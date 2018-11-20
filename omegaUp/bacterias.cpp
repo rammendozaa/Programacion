@@ -19,6 +19,7 @@ int caminoMenor(vector <vector<int> > DP, vector <vector<int> > quimico)
 int main(void)
 {
     ios::sync_with_stdio(false);
+    cin.tie(0);
     cin >> M >> N;
     vector <vector <int> > compuestoQ(M, vector <int> (N, 0));
     vector <vector <int> > DP(M, vector <int> (N));
