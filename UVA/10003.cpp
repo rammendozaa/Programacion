@@ -31,13 +31,11 @@ int main(void)
         vector <int> pedazos;
         cin >> cortes;
         vector <vector <int> > DP(longitud + 1, vector <int>(longitud + 1, -1));
-        pedazos.push_back(0);
         for(int i = 0 ; i < cortes ; i++)
         {
             cin >> auxI;
             pedazos.push_back(auxI);
         }
-        pedazos.push_back(longitud);
         int res = minPrecio(pedazos, DP, 0, longitud);
         cout << "The minimum cutting is " << res << ".\n";
 

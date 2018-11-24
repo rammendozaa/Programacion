@@ -1,5 +1,13 @@
-/* Minimal Coverage */
-/* Accepted */
+/*
+
+Mendoza Ramírez Álvaro (rammendozaa)
+Solución para problema Minimal Coverage
+
+M. en C. Franco Martinez Edgardo Adrián
+Análisis de Algoritmos
+Grupo 3CM3
+
+*/
 #include <iostream>
 #include <vector>
 #include <utility>
@@ -21,15 +29,32 @@ int main(void)
         encontrado = false;
         vector <pair<int, int> > pedazos;
         sort(izqDers.begin(), izqDers.end());
+        /*
+        Se declara un pivote que servirá para saber cual es la posicion última que se
+        quiere cubrir. (pivoteIzq)
+        Se declara un índice que hace referencia a un segmento del arreglo que cumple
+        con la condición y que posteriormente se va a agreagar al arreglo de resultados (agregarPos)
+        Se declara un indice que corresponde a la posicion derecha del segmento (limDer)
+        */
         int pivoteIzq = 0, agregarPos, limDer;
         bool agregarValores = true;
         int i = 0;
+        /*
+        Código que se ejecuta mientras haya un segmento que se pueda agregar
+        al arreglo de las soluciones.
+        */
         while(agregarValores)
         {
             limDer = pivoteIzq;
             agregarValores = false;
+            //Se busca el último segmento que sea menor o igual que el pivote izquierda
             while(i < izqDers.size() && izqDers[i].first <= pivoteIzq)
             {
+                /*
+                Se pregunta si el valor derecho del segmento actual es mayor que
+                el limite derecho actual lo cual significa que se va extendiendo la cobertura total,
+                acecándose a cubrir de 0 a M
+                */
                 if(izqDers[i].second > limDer)
                 {
                     agregarPos = i;
@@ -38,9 +63,17 @@ int main(void)
                 }
                 i++;
             }
+            /*
+            Se actualiza el pivote izquierdo, que se convierte en el limite derecho
+            esto para ir recorriendo los limites e ir buscando los segmentos que cumplan
+            */
             pivoteIzq = limDer;
             if(agregarValores)
                 pedazos.push_back(izqDers[agregarPos]);
+            /*
+            Si el limite derecho es mayor que la M significa que ya se encontraron los
+            segementos que cubren de 0 a M
+            */
             if(limDer >= M)
             {
                 encontrado = true;
@@ -52,6 +85,7 @@ int main(void)
             cout << "0\n";
         else
         {
+            //Se imprimen los valores en el arreglo de resultados
             cout << pedazos.size() << "\n";
             sort(pedazos.begin(), pedazos.end());
             for(auto a : pedazos)

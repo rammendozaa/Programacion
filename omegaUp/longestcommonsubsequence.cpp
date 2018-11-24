@@ -1,5 +1,13 @@
-/* Longest Common Subsequence */
-/* Accepted */
+/*
+
+Mendoza Ramírez Álvaro (rammendozaa)
+Solución para problema Longest Common Subsequence
+
+M. en C. Franco Martinez Edgardo Adrián
+Análisis de Algoritmos
+Grupo 3CM3
+
+*/
 
 #include <iostream>
 #include <string>
@@ -7,14 +15,28 @@
 using namespace std;
 string cadenaA, cadenaB;
 
+/*
+Función que recibe la primera cadena y la segunda cadena a las que se les quiere
+sacar el tamaño de la subsecuencia común más larga.
+Devuleve la longitud mayor de esta subsecuencia.
+*/
+
 int lcs(string A, string B, int tamA, int tamB)
 {
+    /*
+    Se declara el arreglo con el que se va a realizar la DP en donde se va a ir
+    guardando la longitud de la subsecuencia más larga hasta el momento
+    */
     vector <vector<int> > DP(tamA + 1, vector <int>(tamB + 1, -1));
     long long int resultado;
     for(int i = 0 ; i <= tamA ; i++)
     {
         for(int j = 0 ; j <= tamB ; j++)
         {
+            /*
+            Se ejecuta el algoritmo checando los valores de la tabla de longitudes
+            con un caso base donde el valor de la longitud más larga es 0
+            */
             if(i == 0 || j == 0)
                 DP[i][j] = 0;
             else if(A[i - 1] == B[j - 1])
@@ -37,37 +59,3 @@ int main(void)
 
     return 0;
 }
-/*
-#include <bits/stdc++.h>
-using namespace std;
-int lcs(string A, string B, int tamA , int tamB, int DP[][1000])
-{
-    int resultado;
-    if(tamA == 0 || tamB == 0)
-        return 0;
-    if(DP[tamA - 1][tamB - 1] != -1)
-        return DP[tamA - 1][tamB - 1];
-    if(A[tamA - 1] == B[tamB - 1])
-    {
-        resultado = 1 + lcs(A, B, tamA - 1, tamB - 1, DP);
-        DP[tamA - 1][tamB - 1] = resultado;
-        return DP[tamA - 1][tamB - 1];
-    }
-    else
-    {
-        resultado = max(lcs(A, B, tamA - 1, tamB, DP), lcs(A, B, tamA, tamB - 1, DP));
-        DP[tamA - 1][tamB - 1] = resultado;
-        return DP[tamA - 1][tamB - 1];
-    }
-}
-
-int main(void)
-{
-    string cadenaA, cadenaB;
-    cin >> cadenaA >> cadenaB;
-    int DP[cadenaA.length()][1000];
-    memset(DP, -1, sizeof(DP));
-    int res = lcs(cadenaA, cadenaB, cadenaA.length(), cadenaB.length(), DP);
-    cout << res << "\n";
-}
-*/
